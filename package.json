@@ -1,0 +1,71 @@
+{
+  "name": "<PACKAGE_NAME_FULL>",
+  "version": "0.1.0",
+  "description": "Starter Reason Project",
+  "esy": {
+    "build": "dune build -p #{self.name}",
+    "buildDev": "pesy build",
+    "release": {
+      "releasedBinaries": [
+        "<PACKAGE_NAME_UPPER_CAMEL>App.exe"
+      ]
+    }
+  },
+  "pesy": {
+    "azure-project": "esy-dev/esy"
+  },
+  "buildDirs": {
+    "assets": {
+      "rawBuildConfigFooter": [
+        "(install (section bin) (files Roboto-Regular.ttf))"
+      ]
+    },
+    "bin": {
+      "imports": [
+        "Revery = require('@opam/Revery')",
+	"BigArray = require('bigarray')"
+      ],
+      "preprocess": ["pps", "brisk-reconciler.ppx"],
+      "bin": {
+        "<PACKAGE_NAME_UPPER_CAMEL>App.exe": "<PACKAGE_NAME_UPPER_CAMEL>App.re"
+      }
+    }
+  },
+  "scripts": {
+    "start": "esy x <PACKAGE_NAME_UPPER_CAMEL>App.exe"
+  },
+  "revery-packager": {
+    "bundleName": "ExampleApp",
+    "bundleId": "com.example.app",
+    "displayName": "Revery Example App",
+    "mainExecutable": "App",
+    "windows": {
+      "packages": ["zip"],
+      "iconFile": "assets/icon.ico"
+    },
+    "darwin": {
+      "packages": ["tar", "dmg"],
+      "iconFile": "assets/icon.icns"
+    },
+    "linux": {
+      "packages": ["tar", "appimage"]
+    }
+  },
+  "dependencies": {
+    "revery": "^0.31.0",
+    "@opam/dune": "*",
+    "timber": "1.0.0",
+    "esy-macdylibbundler": "*"
+  },
+  "devDependencies": {
+    "ocaml": "~4.9.0",
+    "@pesy/esy-pesy": "0.1.0-alpha.9",
+    "refmterr": "*"
+  },
+  "resolutions": {
+    "ocaml": "4.9.0",
+    "@opam/ppx_tools": "6.0+4.08.0",
+    "reason-sdl2": "2.10.3025",
+    "@pesy/esy-pesy": "link:C:\\Users\\manas\\development\\pesy\\pesy\\package.json"
+  }
+}
