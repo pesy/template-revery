@@ -65,7 +65,6 @@
   "resolutions": {
     "ocaml": "4.9.0",
     "@opam/ppx_tools": "6.0+4.08.0",
-    "reason-sdl2": "2.10.3025",
-    "@pesy/esy-pesy": "link:C:\\Users\\manas\\development\\pesy\\pesy\\package.json"
+    "reason-sdl2": "2.10.3025"
   }
 }
