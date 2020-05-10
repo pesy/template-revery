@@ -53,18 +53,17 @@
     }
   },
   "dependencies": {
+    "ocaml": "4.9.0",
     "revery": "^0.31.0",
     "@opam/dune": "*",
     "timber": "1.0.0",
     "esy-macdylibbundler": "*"
   },
   "devDependencies": {
-    "ocaml": "~4.9.0",
     "@pesy/esy-pesy": "0.1.0-alpha.9",
     "refmterr": "*"
   },
   "resolutions": {
-    "ocaml": "4.9.0",
     "@opam/ppx_tools": "6.0+4.08.0",
     "reason-sdl2": "2.10.3025"
   }
