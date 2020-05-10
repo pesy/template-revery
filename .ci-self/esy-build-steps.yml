@@ -5,7 +5,7 @@ steps:
   - template: utils/use-esy.yml
   - script: "npm install -g pesy@next"
     displayName: "install pesy" 
-  - script: "pesy --init $(Pipeline.Workspace)/hello-reason --template=esy/pesy-reason-template#$(Build.SourceBranch)"
+  - script: "pesy --init $(Pipeline.Workspace)/hello-reason --template=pesy/template-revery#$(Build.SourceBranch)"
     displayName: "Initialize pesy template"
   - script: "esy start"
     displayName: "esy start (running the boilerplate app)"
