@@ -6,10 +6,7 @@ steps:
   - script: "npm install -g pesy@next"
     displayName: "install pesy" 
   - script: "pesy --init $(Pipeline.Workspace)/hello-reason --template=pesy/template-revery#$(Build.SourceBranch)"
-    displayName: "Initialize pesy template"
-  - script: "esy start"
-    displayName: "esy start (running the boilerplate app)"
-    workingDirectory: $(Pipeline.Workspace)/hello-reason
+    displayName: "Initialize and build pesy template"
   - template: utils/publish-build-cache.yml
   - task: PublishBuildArtifacts@1  
     displayName: 'Upload project directory'
