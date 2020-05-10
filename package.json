@@ -64,6 +64,7 @@
     "refmterr": "*"
   },
   "resolutions": {
+    "ocaml": "4.9.0",
     "@opam/ppx_tools": "6.0+4.08.0",
     "reason-sdl2": "2.10.3025"
   }
