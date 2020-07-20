@@ -1,7 +1,7 @@
 {
   "name": "<PACKAGE_NAME_FULL>",
   "version": "0.1.0",
-  "description": "Starter Reason Project",
+  "description": "Starter Revery Project",
   "esy": {
     "build": "dune build -p #{self.name}",
     "buildDev": "pesy build",
