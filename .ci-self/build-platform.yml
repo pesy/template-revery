@@ -20,10 +20,10 @@ jobs:
       # Needed so that the mingw tar doesn't shadow the system tar. See
       # pipelines.yaml. We need windows bsdtar from system32, not the mingw
       # one. Note powershell doesn't need escaping of backslashes.
-      - powershell: Write-Host "##vso[task.setvariable variable=PATH;]C:\Windows\system32;${env:PATH}"
+      - powershell: Write-Host "##vso[task.setvariable variable=PATH;]C:\Program Files\Git\bin;C:\Windows\system32;${env:PATH}"
         continueOnError: true
         condition: eq(variables['AGENT.OS'], 'Windows_NT')
-        displayName: "Make sure windows/system32 is at front of path if windows"
+        displayName: "Make sure git/bin and windows/system32 is at front of path if windows"
       - powershell: $Env:Path
         continueOnError: true
         condition: and(eq(variables['AGENT.OS'], 'Windows_NT'), and(eq(variables['Build.Reason'], 'PullRequest'), and(succeeded(), ne(variables['Build.SourceBranch'], variables['System.PullRequest.TargetBranch']))))
@@ -36,27 +36,30 @@ jobs:
         continueOnError: true
         condition: and(eq(variables['AGENT.OS'], 'Windows_NT'), and(eq(variables['Build.Reason'], 'PullRequest'), and(succeeded(), ne(variables['Build.SourceBranch'], variables['System.PullRequest.TargetBranch']))))
         displayName: "Print tar help"
-      - bash: |
-          # COMPUTE THE ESY INSTALL CACHE LOCATION AHEAD OF TIME
-          DESIRED_LEN="86"
-          # Note: This will need to change when upgrading esy version
-          # that reenables long paths on windows.
-          if [ "$AGENT_OS" == "Windows_NT" ]; then
-            DESIRED_LEN="33"
-          fi
-          HOME_ESY3="$HOME/.esy/3"
-          HOME_ESY3_LEN=${#HOME_ESY3}
-          NUM_UNDERS=$(echo "$(($DESIRED_LEN-$HOME_ESY3_LEN))")
-          UNDERS=$(printf "%-${NUM_UNDERS}s" "_")
-          UNDERS="${UNDERS// /_}"
-          THE_ESY__CACHE_INSTALL_PATH=${HOME_ESY3}${UNDERS}/i
-          if [ "$AGENT_OS" == "Windows_NT" ]; then
-            THE_ESY__CACHE_INSTALL_PATH=$( cygpath --mixed --absolute "$THE_ESY__CACHE_INSTALL_PATH")
-          fi
-          echo "THE_ESY__CACHE_INSTALL_PATH: $THE_ESY__CACHE_INSTALL_PATH"
-          # This will be exposed as an env var ESY__CACHE_INSTALL_PATH, or an
-          # Azure var esy__cache_install_path
-          echo "##vso[task.setvariable variable=esy__cache_install_path]$THE_ESY__CACHE_INSTALL_PATH"
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: |
+            # COMPUTE THE ESY INSTALL CACHE LOCATION AHEAD OF TIME
+            DESIRED_LEN="86"
+            # Note: This will need to change when upgrading esy version
+            # that reenables long paths on windows.
+            # if [ "$AGENT_OS" == "Windows_NT" ]; then
+            #   DESIRED_LEN="33"
+            # fi
+            HOME_ESY3="$HOME/.esy/3"
+            HOME_ESY3_LEN=${#HOME_ESY3}
+            NUM_UNDERS=$(echo "$(($DESIRED_LEN-$HOME_ESY3_LEN))")
+            UNDERS=$(printf "%-${NUM_UNDERS}s" "_")
+            UNDERS="${UNDERS// /_}"
+            THE_ESY__CACHE_INSTALL_PATH=${HOME_ESY3}${UNDERS}/i
+            if [ "$AGENT_OS" == "Windows_NT" ]; then
+              THE_ESY__CACHE_INSTALL_PATH=$( cygpath --mixed --absolute "$THE_ESY__CACHE_INSTALL_PATH")
+            fi
+            echo "THE_ESY__CACHE_INSTALL_PATH: $THE_ESY__CACHE_INSTALL_PATH"
+            # This will be exposed as an env var ESY__CACHE_INSTALL_PATH, or an
+            # Azure var esy__cache_install_path
+            echo "##vso[task.setvariable variable=esy__cache_install_path]$THE_ESY__CACHE_INSTALL_PATH"
       # - bash: |
       #     which esy
       #     echo "$( which esy )"
