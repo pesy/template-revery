@@ -3,6 +3,7 @@
 steps:
   - template: utils/use-node.yml
   - template: utils/use-esy.yml
+  - template: utils/use-esy-cache.yml
   - script: "esy install"
     displayName: "esy install"
   - template: utils/restore-build-cache.yml
