@@ -65,6 +65,7 @@
   },
   "resolutions": {
     "ocaml": "4.9.0",
+    "esy-cmake": "esy-packages/esy-cmake#a997a6351e0f382",
     "@opam/ppx_tools": "6.0+4.08.0",
     "reason-sdl2": "2.10.3025"
   }
