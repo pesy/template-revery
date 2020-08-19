@@ -54,9 +54,8 @@
   },
   "dependencies": {
     "ocaml": "4.9.0",
-    "revery": "revery-ui/revery#8fd380c",
+    "revery": "revery-ui/revery#625794e",
     "@opam/dune": "*",
-    "timber": "1.0.0",
     "esy-macdylibbundler": "*"
   },
   "devDependencies": {

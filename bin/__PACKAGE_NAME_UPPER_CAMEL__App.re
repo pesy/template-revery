@@ -98,12 +98,7 @@ let main = () => {
 
 let init = app => {
   Revery.App.initConsole();
-
-  Timber.App.enable();
-  Timber.App.setLevel(Timber.Level.perf);
-
   let win = App.createWindow(app, "Welcome to Revery!");
-
   let _: Revery.UI.renderFunction = UI.start(win, <main />);
   ();
 };
