@@ -11,15 +11,15 @@ trigger:
   - feature-*
 
 jobs:
-  - template: .ci-self/build-platform.yml
-    parameters:
-      platform: Linux
-      vmImage: ubuntu-16.04
+  # - template: .ci-self/build-platform.yml
+  #   parameters:
+  #     platform: Linux
+  #     vmImage: ubuntu-16.04
 
-  - template: .ci-self/build-platform.yml
-    parameters:
-      platform: macOS
-      vmImage: macOS-latest
+  # - template: .ci-self/build-platform.yml
+  #   parameters:
+  #     platform: macOS
+  #     vmImage: macOS-latest
 
   # Need windows-2019 to do esy import/export-dependencies
   # which assumes you have bsdtar (tar.exe) in your system
